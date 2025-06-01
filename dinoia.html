@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinoia Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            height: 100vh;
+            width: 100vw;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map', {
+            center: [-69, 56.4],
+            zoom: 3,
+            minZoom: 0,
+            maxZoom: 6,
+            crs: L.CRS.Simple
+        });
+
+        // Load tiles from /tiles/{z}/{x}/{y}.png
+        L.tileLayer('tiles/{z}/{x}/{y}.png', {
+            tileSize: 256,
+            minZoom: 0,
+            maxZoom: 6,
+            noWrap: true
+        }).addTo(map);
+
+        var popup = L.popup();
+
+        function onMapClick(e) {
+            popup
+                .setLatLng(e.latlng)
+                .setContent(e.latlng.toString().substring(7, e.latlng.toString().length - 1))
+                .openOn(map);
+        }
+
+        map.on('click', onMapClick);
+
+        // L.marker([]).addTo(map).bindPopup("<b></b><br>");
+
+        // Dinoian cities
+        L.marker([-58.081931, 70.03898]).addTo(map).bindPopup("<b>The City of Dinoia</b><br>The capital city of The Kingdom of Dinoia. It's usually referred to as \"The Capital\", and it has roads to almost every city of Dinoia.");
+        L.marker([-73.577165, 67.4375]).addTo(map).bindPopup("<b>Subia</b><br>A small city located in the south of The Capital.");
+        L.marker([-74.545708, 77.46875]).addTo(map).bindPopup("<b>Ashilia</b><br>A city located in the southeast coastline of Dinoia. It has a seaport used for travelling to Farland.");
+        L.marker([-82.621943, 53.9375]).addTo(map).bindPopup("<b>Bridia</b><br>A city located near The Great Bridge of Too's River.");
+        L.marker([-79.028634, 42.953125]).addTo(map).bindPopup("<b>Rakia</b><br>A city located in the southwest of The Kingdom of Dinoia. It's mostly populated by religious people due to being near the Too's River.");
+        L.marker([-66.247866, 46.078125]).addTo(map).bindPopup("<b>Neria</b><br>A city located in the Artado Annex border of The Kingdom of Dinoia. It contains the tip of The Great Crack and The Crack River.");
+        L.marker([-37.452255, 64.703125]).addTo(map).bindPopup("<b>Efficia</b><br>A city located in the north of The Capital. It contains Boorn's River, so it's mostly populated by rich people.");
+        L.marker([-38.717605, 81.359375]).addTo(map).bindPopup("<b>Poritia</b><br>The city connecting the most cities after The Capital. It has roads to five cities (The Capital, Efficia, Banania, Melia, Defia). A portion of its population is Noradian because of The Second Great Fight of Artadishes.");
+        L.marker([-47.811143, 92.4375]).addTo(map).bindPopup("<b>Banania</b><br>A small city located in the south of Krann's River.");
+        L.marker([-43.514874, 93.984375]).addTo(map).bindPopup("<b>Esia</b><br>A metropolis (it's the biggest city after The Capital) located in the north of Krann's River. It's known for its high beauty standards.");
+        L.marker([-31.499013, 91.484375]).addTo(map).bindPopup("<b>Melia</b><br>It's called \"The City of The Innocent\" because they never fought a war and were always a part of The Kingdom of Dinoia.");
+        L.marker([-27.483954, 83.1875]).addTo(map).bindPopup("<b>Defia</b><br>Mostly populated by Noradians who forgot their culture and language, some people are racist against them but they're living their lives just like Dinoians.");
+        L.marker([-19.108798, 94.84375]).addTo(map).bindPopup("<b>Ekia</b><br>A city located in the north of The Kingdom of Dinoia.");
+
+        // Artadish cities
+        L.marker([-40.967878, 29.625]).addTo(map).bindPopup("<b>Marilan</b><br>The capital city of The Artado State.");
+        L.marker([-39.030651, 17.15625]).addTo(map).bindPopup("<b>Pinumran</b><br>A city located in the west of Marilan.");
+        L.marker([-33.843882, 35.421875]).addTo(map).bindPopup("<b>Kostan</b><br>A city located in the east of Marilan.");
+        L.marker([-27.610386, 46.4375]).addTo(map).bindPopup("<b>Fahkostan</b><br>A city located in across the Kostan coast, in the Artado Annex.");
+        L.marker([-25.84501, 54.671875]).addTo(map).bindPopup("<b>Karar</b><br>A city located in the east of Fahkostan, in the Artado Annex.");
+
+        // Noradish cities
+        L.marker([-60.93613, 21.375]).addTo(map).bindPopup("<b>The City of Noradia</b><br>The capital city of Noradia. It's connected to The Kingdom of Dinoia by The Second Great Trade Road");
+        L.marker([-62.404783, 11.21875]).addTo(map).bindPopup("<b>Kosnoradia</b><br>A city located in the west of The Great Noradian Lake.");
+
+        // Agridinoian cities
+        L.marker([-106.996009, 68.8125]).addTo(map).bindPopup("<b>The City of Agridinoia</b><br>The capital city of Agridinoia. It's located between two long rivers.");
+        L.marker([-96.747454, 67.5625]).addTo(map).bindPopup("<b>Compleia</b><br>A city located in the north of The City of Agridinoia.");
+        
+        // Splitland
+        L.marker([-129.151387, 84.03125]).addTo(map).bindPopup("<b>Splitland</b><br>An island very close to the Dinoia continent, connected to Agridinoia with a bridge.");
+
+        // Farland
+        L.marker([-62.685848, 104.71875]).addTo(map).bindPopup("<b>Farland</b><br>An island located in the far east of Dinoia");
+    </script>
+</body>
+
+</html>
